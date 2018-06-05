@@ -1,8 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Hero, HeroService } from './hero.service';
-import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { slideInDownAnimation} from '../animations';
 
 
 @Component({
@@ -16,8 +16,13 @@ import { Observable } from 'rxjs';
       <button (click)="goBack(hero)">Back</button>
     </ng-container>
   `,
+  animations: [slideInDownAnimation]
 })
 export class HeroDetailComponent implements OnInit {
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.position') position = 'absolute';
+
   hero$: Observable<Hero>;
 
   constructor(
@@ -34,7 +39,7 @@ export class HeroDetailComponent implements OnInit {
     this.hero$ = this.heroService.getHero(heroId);
   }
 
-  goBack(hero: Hero) {
+  goBack(hero) {
     const heroId = hero ? hero.id : null; // argument from template may be null
 
     this.router.navigate(['/heroes', { prevHeroId: heroId }]);
