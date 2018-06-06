@@ -9,6 +9,7 @@ import { RoutingModule } from './routing/routing.module';
 import { HeroesModule } from './heroes/heroes.module';
 import { CrisisModule } from './crisis-center/crisis.module';
 import { ComposeMessageComponent } from './compose-message.component';
+import { AdminModule } from './admin.module';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ComposeMessageComponent } from './compose-message.component';
     FormsModule,
     HeroesModule,
     CrisisModule,
+    AdminModule,
     RoutingModule
   ],
   bootstrap: [AppComponent]
