@@ -11,7 +11,7 @@ import { slideInDownAnimation} from '../animations';
 @Component({
   template: `
     <h2>Crisis Detail</h2>
-    <ng-container *ngIf="crisis$ | async as crisis">
+    <ng-container *ngIf="crisis">
       <h3>{{crisis.name}}</h3>
       <p>id: {{crisis.id}}</p>
       <p>name: <input [(ngModel)]="crisis.name"></p>
@@ -26,19 +26,17 @@ export class CrisisDetailComponent implements OnInit {
   @HostBinding('style.display') display = 'block';
   @HostBinding('style.position') position = 'absolute';
 
-  crisis$: Observable<Crisis>;
+  crisis: Crisis
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private crisisService: CrisisService
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.crisis$ = this.activatedRoute.paramMap.pipe(
-      map((paramMap) => paramMap.get('id')),
-      switchMap(id => this.crisisService.getCrisis(id))
-    );
+    this.activatedRoute.data.subscribe((data: { crisis: Crisis }) => {
+      this.crisis = data.crisis;
+    });
   }
 
   goBack(crisis) {
