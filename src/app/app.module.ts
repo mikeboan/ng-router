@@ -10,13 +10,20 @@ import { HeroesModule } from './heroes/heroes.module';
 import { CrisisModule } from './crisis-center/crisis.module';
 import { ComposeMessageComponent } from './compose-message.component';
 import { AdminModule } from './admin.module';
+import { AuthGuard } from './auth-guard.service';
+import { AuthService } from './auth.service';
+import { LoginComponent } from './login.component';
+import { LogoutComponent } from './logout.component';
+import { NoAuthGuard } from './no-auth-guard.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    ComposeMessageComponent
+    ComposeMessageComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -25,7 +32,12 @@ import { AdminModule } from './admin.module';
     HeroesModule,
     CrisisModule,
     AdminModule,
-    RoutingModule
+    RoutingModule,
+  ],
+  providers: [
+    AuthGuard,
+    NoAuthGuard,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
