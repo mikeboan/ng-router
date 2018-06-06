@@ -1,0 +1,11 @@
+<div>
+  <h1>Compose Message</h1>
+
+  <label for="message-input"></label>
+
+  <textarea id="message-input" #messageInput></textarea>
+
+  <button (click)="send(messageInput.value)">Send</button>
+  <br>
+  <button (click)="cancel()">Cancel</button>
+</div>
